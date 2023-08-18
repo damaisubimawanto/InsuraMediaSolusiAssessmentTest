@@ -14,6 +14,8 @@ object Constants {
     const val HEADER_ACCEPT = "accept"
     const val HEADER_ACCEPT_JSON = "application/json"
     const val QUERY_LANGUAGE_DEFAULT = "en"
+    const val QUERY_LANGUAGE_US_DEFAULT = "en-US"
+    const val QUERY_SORT_BY_DEFAULT = "popularity.desc"
 
     const val API_READ_ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYmEwNzFjNDE1MGU2ZTI4NGQxZDhhN2M2YTlhMGQ0ZCIsInN1YiI6IjY0ZDQ5MjUyYmYzMWYyMDFjYThhOWE3NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jil-iYE63c5aPI8bc_WlKKas2j9zmuO_qXeGFj-ItrQ"
 }

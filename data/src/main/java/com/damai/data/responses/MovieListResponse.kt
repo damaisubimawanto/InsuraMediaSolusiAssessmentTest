@@ -31,7 +31,7 @@ class MovieItemResponse {
     var overview: String? = null
 
     @SerializedName("popularity")
-    var popularity: Int? = null
+    var popularity: Double? = null
 
     @SerializedName("poster_path")
     var posterPath: String? = null

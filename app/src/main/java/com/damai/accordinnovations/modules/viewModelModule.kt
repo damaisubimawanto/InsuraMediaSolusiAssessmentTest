@@ -14,6 +14,7 @@ val viewModelModule = module {
         MainViewModel(
             app = androidApplication(),
             getMovieGenreListUseCase = get(),
+            getMovieItemListUseCase = get(),
             dispatcher = get()
         )
     }

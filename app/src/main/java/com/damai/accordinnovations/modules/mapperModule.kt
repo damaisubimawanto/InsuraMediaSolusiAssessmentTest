@@ -1,6 +1,7 @@
 package com.damai.accordinnovations.modules
 
 import com.damai.data.mappers.MovieGenreResponseToMovieGenreModelMapper
+import com.damai.data.mappers.MovieItemResponseToMovieItemModelMapper
 import org.koin.dsl.module
 
 /**
@@ -10,5 +11,8 @@ import org.koin.dsl.module
 val mapperModule = module {
     factory {
         MovieGenreResponseToMovieGenreModelMapper()
+    }
+    factory {
+        MovieItemResponseToMovieItemModelMapper()
     }
 }

@@ -13,7 +13,8 @@ val repositoryModule = module {
         HomeRepositoryImpl(
             homeService = get(),
             dispatcher = get(),
-            movieGenreMapper = get()
+            movieGenreMapper = get(),
+            movieItemMapper = get()
         )
     }
 }
