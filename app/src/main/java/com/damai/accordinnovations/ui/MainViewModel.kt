@@ -44,6 +44,7 @@ class MainViewModel(
                     is Resource.Success -> {
                         resource.model?.list?.let { response ->
                             _genreListLiveData.postValue(response)
+                            selectedGenreName = response.firstOrNull()?.name.orEmpty()
                             getMovieList()
                         }
                     }
