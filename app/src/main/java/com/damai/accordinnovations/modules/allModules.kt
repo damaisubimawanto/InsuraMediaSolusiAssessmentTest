@@ -7,7 +7,10 @@ import com.damai.accordinnovations.navigations.pageNavigationModule
  */
 
 val allModules = listOf(
+    mapperModule,
     networkModule,
     pageNavigationModule,
+    repositoryModule,
+    useCaseModule,
     viewModelModule
 )

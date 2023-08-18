@@ -12,7 +12,9 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel {
         MainViewModel(
-            app = androidApplication()
+            app = androidApplication(),
+            getMovieGenreListUseCase = get(),
+            dispatcher = get()
         )
     }
 }

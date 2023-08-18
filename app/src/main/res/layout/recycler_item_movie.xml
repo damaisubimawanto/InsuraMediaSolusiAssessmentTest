@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivMovieThumbnail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="9:16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMovieRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/light_grey"
+            android:padding="@dimen/dimen_4"
+            app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
+            app:layout_constraintTop_toBottomOf="@+id/guidelineTopPadding"
+            tools:text="7.6" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMovieTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/light_grey"
+            android:gravity="center"
+            android:padding="@dimen/dimen_8"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineBottomPadding"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRightPadding"
+            app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
+            app:layout_constraintWidth_default="wrap"
+            tools:text="Captain America (2012)" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineBottomPadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/dimen_8" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLeftPadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/dimen_8" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRightPadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/dimen_8" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineTopPadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="@dimen/dimen_8" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -37,7 +37,7 @@ dependencies {
     implementation(project(":base"))
     implementation(project(":domain"))
 
-    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
     testImplementation("androidx.test.espresso:espresso-core:3.5.1")
     testImplementation("androidx.test.ext:junit:1.1.5")
 }

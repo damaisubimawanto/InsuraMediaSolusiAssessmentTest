@@ -6,4 +6,6 @@ package com.damai.base
 open class BaseModel {
     var status: Int? = null
     var message: String? = null
+    var currentPage: Int? = null
+    var totalPage: Int? = null
 }

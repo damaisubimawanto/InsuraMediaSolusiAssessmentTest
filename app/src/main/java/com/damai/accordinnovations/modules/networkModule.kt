@@ -2,8 +2,14 @@ package com.damai.accordinnovations.modules
 
 import com.damai.base.coroutines.DispatcherProvider
 import com.damai.base.coroutines.DispatcherProviderImpl
+import com.damai.base.utils.Constants.API_READ_ACCESS_TOKEN
 import com.damai.base.utils.Constants.BASE_URL
+import com.damai.base.utils.Constants.HEADER_ACCEPT
+import com.damai.base.utils.Constants.HEADER_ACCEPT_JSON
+import com.damai.base.utils.Constants.HEADER_AUTHORIZATION
+import com.damai.base.utils.Constants.HEADER_BEARER
 import com.damai.base.utils.Constants.TIMEOUT
+import com.damai.data.apiservices.HomeService
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -28,6 +34,15 @@ val networkModule = module {
             writeTimeout(TIMEOUT, TimeUnit.SECONDS)
             readTimeout(TIMEOUT, TimeUnit.SECONDS)
             cache(null)
+            addInterceptor { chain ->
+                val original = chain.request()
+                val request = original.newBuilder()
+                    .header(HEADER_AUTHORIZATION, "$HEADER_BEARER $API_READ_ACCESS_TOKEN")
+                    .header(HEADER_ACCEPT, HEADER_ACCEPT_JSON)
+                    .method(original.method, original.body)
+                    .build()
+                chain.proceed(request)
+            }
             addInterceptor(logging)
         }.build()
     }
@@ -40,9 +55,9 @@ val networkModule = module {
             .build()
     }
 
-    /*factory {
+    factory {
         get<Retrofit>().create(HomeService::class.java)
-    }*/
+    }
 
     factory<DispatcherProvider> {
         DispatcherProviderImpl()
