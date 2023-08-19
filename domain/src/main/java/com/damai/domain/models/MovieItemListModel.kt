@@ -18,6 +18,7 @@ data class MovieItemModel(
     val bannerPath: String?,
     val posterPath: String?,
     val voteAverage: Double,
+    val voteCount: Int,
     val runtime: Int,
     val releaseDate: String?,
     val genresText: String?

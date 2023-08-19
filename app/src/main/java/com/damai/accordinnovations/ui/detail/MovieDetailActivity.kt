@@ -3,6 +3,7 @@ package com.damai.accordinnovations.ui.detail
 import com.damai.accordinnovations.R
 import com.damai.accordinnovations.databinding.ActivityMovieDetailBinding
 import com.damai.base.BaseActivity
+import com.damai.base.extensions.setCustomOnClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -18,6 +19,12 @@ class MovieDetailActivity : BaseActivity<ActivityMovieDetailBinding, MovieDetail
         viewModel.initFromIntent(bundle = intent.extras)
         vm = viewModel
         lifecycleOwner = this@MovieDetailActivity
+    }
+
+    override fun ActivityMovieDetailBinding.setupListeners() {
+        clMovieReviewCount.setCustomOnClickListener {
+            // TODO: Open bottom sheet dialog to show user's reviews
+        }
     }
 
     override fun ActivityMovieDetailBinding.onPreparationFinished() {

@@ -29,7 +29,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:loadImage="@{vm.movieDetailsLiveData.bannerPath}"
+                app:loadBigImage="@{vm.movieDetailsLiveData.bannerPath}"
                 tools:background="@color/dodger_blue" />
 
             <com.google.android.material.card.MaterialCardView
@@ -37,6 +37,8 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:cardCornerRadius="@dimen/dimen_8"
+                app:cardElevation="@dimen/dimen_8"
+                app:cardMaxElevation="@dimen/dimen_8"
                 app:layout_constraintDimensionRatio="0.6667"
                 app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
                 app:layout_constraintTop_toTopOf="@+id/spaceTopBanner"
@@ -50,6 +52,39 @@
                     tools:background="@color/indian_red" />
 
             </com.google.android.material.card.MaterialCardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clMovieReviewCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_8"
+                app:layout_constraintBottom_toBottomOf="@+id/cvMovieThumbnail"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineRightPadding"
+                app:layout_constraintStart_toEndOf="@+id/cvMovieThumbnail"
+                app:layout_constraintTop_toBottomOf="@+id/ivMovieBigBanner">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivMovieReviewCount"
+                    android:layout_width="@dimen/dimen_24"
+                    android:layout_height="@dimen/dimen_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_reviews_48px"
+                    app:tint="@color/yellow" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMovieReviewCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivMovieReviewCount"
+                    app:movieReviews="@{vm.movieDetailsLiveData.voteCount}"
+                    tools:text="900+\nReviews" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvMovieTitle"
@@ -136,8 +171,8 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="@+id/ivMovieBigBanner"
+                app:layout_constraintDimensionRatio="6.5"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.15"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline

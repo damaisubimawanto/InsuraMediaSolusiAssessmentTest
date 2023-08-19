@@ -7,6 +7,7 @@ object Constants {
 
     const val BASE_URL = "https://api.themoviedb.org"
     const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
+    const val BASE_BIG_IMAGE_URL = "https://image.tmdb.org/t/p/w1280"
     const val TIMEOUT = 60L
     const val SUCCESS_CODE = 200
 

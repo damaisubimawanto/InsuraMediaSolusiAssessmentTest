@@ -21,6 +21,7 @@ class MovieItemResponseToMovieItemModelMapper : BaseMapper<MovieItemResponse, Mo
             bannerPath = value.backdropPath,
             posterPath = value.posterPath,
             voteAverage = value.voteAverage.orZero(),
+            voteCount = value.voteCount.orZero(),
             runtime = value.runtime.orZero(),
             releaseDate = value.releaseDate,
             genresText = value.genres?.joinToString(separator = " - ") {
