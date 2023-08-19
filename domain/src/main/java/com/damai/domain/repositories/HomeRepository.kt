@@ -23,10 +23,12 @@ interface HomeRepository {
         requestModel: MovieItemByGenreRequestModel
     ): Flow<Resource<MovieItemListModel>>
 
+    @Throws(Exception::class)
     fun getMovieDetails(
         movieId: Int
     ): Flow<Resource<MovieDetailsModel>>
 
+    @Throws(Exception::class)
     fun getMovieReviewList(
         requestModel: ReviewItemRequestModel
     ): Flow<Resource<ReviewItemListModel>>
