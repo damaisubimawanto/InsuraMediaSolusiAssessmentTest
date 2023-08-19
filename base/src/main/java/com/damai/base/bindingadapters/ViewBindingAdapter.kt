@@ -3,6 +3,7 @@ package com.damai.base.bindingadapters
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.BindingAdapter
+import com.damai.base.R
 import com.damai.base.extensions.loadImageWithCenterCrop
 import com.damai.base.utils.Constants.BASE_BIG_IMAGE_URL
 import com.damai.base.utils.Constants.BASE_IMAGE_URL
@@ -62,7 +63,7 @@ object ViewBindingAdapter {
     @JvmStatic
     @BindingAdapter("movieRuntime")
     fun bindMovieRuntime(view: AppCompatTextView, movieRuntime: Int) {
-        val runtimeText = "$movieRuntime min"
+        val runtimeText = view.resources.getString(R.string.runtime, movieRuntime)
         view.text = runtimeText
     }
 
@@ -76,9 +77,9 @@ object ViewBindingAdapter {
     @BindingAdapter("movieReviews")
     fun bindMovieReviews(view: AppCompatTextView, movieReviewCount: Int) {
         val reviewText = if (movieReviewCount > 1) {
-            "${movieReviewCount}\nReviews"
+            view.resources.getString(R.string.reviews_counter_many, movieReviewCount)
         } else {
-            "${movieReviewCount}\nReview"
+            view.resources.getString(R.string.reviews_counter_single, movieReviewCount)
         }
         view.text = reviewText
     }

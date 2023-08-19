@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="runtime" formatted="false">%d min</string>
+    <string name="reviews_counter_many" formatted="false">%d\nReviews</string>
+    <string name="reviews_counter_single" formatted="false">%d\nReview</string>
+</resources>

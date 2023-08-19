@@ -14,4 +14,11 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="MovieDetails" parent="Theme.AccordInnovations">
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/full_transparent</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!-- Customize your theme here. -->
+    </style>
 </resources>

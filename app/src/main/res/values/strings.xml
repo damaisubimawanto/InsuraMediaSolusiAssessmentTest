@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Accord Innovations</string>
+    <string name="release_text">Release</string>
+    <string name="runtime_text">Runtime</string>
+    <string name="genre_text">Genre</string>
+    <string name="description_text">Description</string>
 </resources>

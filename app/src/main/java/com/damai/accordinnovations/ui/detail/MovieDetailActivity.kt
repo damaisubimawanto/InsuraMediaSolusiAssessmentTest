@@ -30,4 +30,6 @@ class MovieDetailActivity : BaseActivity<ActivityMovieDetailBinding, MovieDetail
     override fun ActivityMovieDetailBinding.onPreparationFinished() {
         viewModel.getMovieDetails()
     }
+
+    override fun isRemoveFitsSystemWindows(): Boolean = true
 }

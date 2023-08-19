@@ -2,6 +2,7 @@ package com.damai.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
@@ -20,6 +21,9 @@ abstract class BaseActivity<VB: ViewDataBinding, VM: ViewModel> : AppCompatActiv
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (isRemoveFitsSystemWindows()) {
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+        }
         _binding = DataBindingUtil.setContentView(this, layoutResource)
         binding.viewInitialization()
         binding.setupListeners()
@@ -40,5 +44,9 @@ abstract class BaseActivity<VB: ViewDataBinding, VM: ViewModel> : AppCompatActiv
     open fun VB.setupObservers() {}
 
     open fun VB.onPreparationFinished() {}
+
+    open fun isRemoveFitsSystemWindows(): Boolean {
+        return false
+    }
     //endregion `Optional implementation`
 }
