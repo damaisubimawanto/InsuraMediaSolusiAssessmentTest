@@ -110,5 +110,6 @@ class MovieDetailViewModel(
 
     fun resetReviewList() {
         reviewCurrentPage = 1
+        _movieReviewsLiveData.value = listOf()
     }
 }
