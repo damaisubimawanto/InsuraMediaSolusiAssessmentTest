@@ -2,8 +2,19 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+
+        <import type="com.damai.base.bindingadapters.ViewBindingAdapter" />
+        
+        <variable
+            name="model"
+            type="com.damai.domain.models.MovieItemModel" />
+        
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clMainView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -14,7 +25,8 @@
             app:layout_constraintDimensionRatio="9:16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{model.posterPath}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvMovieRating"
@@ -24,6 +36,7 @@
             android:padding="@dimen/dimen_4"
             app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
             app:layout_constraintTop_toBottomOf="@+id/guidelineTopPadding"
+            app:movieRating="@{model.voteAverage}"
             tools:text="7.6" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -37,6 +50,8 @@
             app:layout_constraintEnd_toStartOf="@+id/guidelineRightPadding"
             app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
             app:layout_constraintWidth_default="wrap"
+            app:movieTitle="@{model.title}"
+            app:movieReleaseDate="@{model.releaseDate}"
             tools:text="Captain America (2012)" />
 
         <androidx.constraintlayout.widget.Guideline

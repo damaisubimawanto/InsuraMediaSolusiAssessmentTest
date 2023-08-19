@@ -16,5 +16,6 @@ data class MovieItemModel(
     val title: String?,
     val overview: String?,
     val posterPath: String?,
-    val voteAverage: Double
+    val voteAverage: Double,
+    val releaseDate: String?
 )

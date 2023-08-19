@@ -1,6 +1,6 @@
 package com.damai.accordinnovations.modules
 
-import com.damai.accordinnovations.ui.MainViewModel
+import com.damai.accordinnovations.ui.main.MainViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

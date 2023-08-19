@@ -9,6 +9,7 @@ import com.damai.accordinnovations.R
 import com.damai.accordinnovations.databinding.RecyclerItemMovieBinding
 import com.damai.accordinnovations.databinding.RecyclerItemMovieFooterBinding
 import com.damai.base.BaseViewHolder
+import com.damai.base.extensions.setCustomOnClickListener
 import com.damai.domain.models.MovieItemModel
 import com.damai.domain.models.MovieUiModel
 
@@ -75,7 +76,14 @@ class MovieAdapter(
 
         override fun bind(data: MovieItemModel) {
             with(binding) {
-                tvMovieTitle.text = data.title
+                model = data
+                if (hasPendingBindings()) {
+                    executePendingBindings()
+                }
+
+                clMainView.setCustomOnClickListener {
+                    clickCallback.invoke(data)
+                }
             }
         }
     }

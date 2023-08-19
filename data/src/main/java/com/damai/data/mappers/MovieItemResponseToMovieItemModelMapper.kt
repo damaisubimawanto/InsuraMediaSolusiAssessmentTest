@@ -19,7 +19,8 @@ class MovieItemResponseToMovieItemModelMapper : BaseMapper<MovieItemResponse, Mo
             title = value.title,
             overview = value.overview,
             posterPath = value.posterPath,
-            voteAverage = value.voteAverage.orZero()
+            voteAverage = value.voteAverage.orZero(),
+            releaseDate = value.releaseDate
         )
     }
 }

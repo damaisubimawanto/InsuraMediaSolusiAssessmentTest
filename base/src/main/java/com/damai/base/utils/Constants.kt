@@ -6,6 +6,7 @@ package com.damai.base.utils
 object Constants {
 
     const val BASE_URL = "https://api.themoviedb.org"
+    const val BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
     const val TIMEOUT = 60L
     const val SUCCESS_CODE = 200
 
@@ -16,6 +17,8 @@ object Constants {
     const val QUERY_LANGUAGE_DEFAULT = "en"
     const val QUERY_LANGUAGE_US_DEFAULT = "en-US"
     const val QUERY_SORT_BY_DEFAULT = "popularity.desc"
+
+    const val ARGS_MOVIE_ID = "argsMovieId"
 
     const val API_READ_ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYmEwNzFjNDE1MGU2ZTI4NGQxZDhhN2M2YTlhMGQ0ZCIsInN1YiI6IjY0ZDQ5MjUyYmYzMWYyMDFjYThhOWE3NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jil-iYE63c5aPI8bc_WlKKas2j9zmuO_qXeGFj-ItrQ"
 }

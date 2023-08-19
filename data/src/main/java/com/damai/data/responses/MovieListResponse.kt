@@ -50,4 +50,46 @@ class MovieItemResponse {
 
     @SerializedName("vote_count")
     var voteCount: Int? = null
+
+    /* More fields in movie details. */
+    @SerializedName("budget")
+    var budget: Int? = null
+
+    @SerializedName("genres")
+    var genres: List<MovieGenreResponse>? = null
+
+    @SerializedName("homepage")
+    var homepage: String? = null
+
+    @SerializedName("imdb_id")
+    var imdbId: Int? = null
+
+    @SerializedName("production_companies")
+    var productionCompanies: List<ProductionCompanyResponse>? = null
+
+    @SerializedName("revenue")
+    var revenue: Int? = null
+
+    @SerializedName("runtime")
+    var runtime: Int? = null
+
+    @SerializedName("status")
+    var status: String? = null
+
+    @SerializedName("tagline")
+    var tagline: String? = null
+}
+
+class ProductionCompanyResponse {
+    @SerializedName("id")
+    var id: Int? = null
+
+    @SerializedName("logo_path")
+    var logoPath: String? = null
+
+    @SerializedName("name")
+    var name: String? = null
+
+    @SerializedName("origin_country")
+    var originCountry: String? = null
 }

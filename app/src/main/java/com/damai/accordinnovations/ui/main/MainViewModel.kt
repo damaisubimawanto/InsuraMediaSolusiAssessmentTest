@@ -1,4 +1,4 @@
-package com.damai.accordinnovations.ui
+package com.damai.accordinnovations.ui.main
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
@@ -80,5 +80,13 @@ class MainViewModel(
                 }
             }
         }
+    }
+
+    fun incrementCurrentPage() {
+        currentPage++
+    }
+
+    fun resetCurrentPage() {
+        currentPage = 1
     }
 }
