@@ -10,6 +10,7 @@ import com.damai.base.utils.Constants.SUCCESS_CODE
 import com.damai.data.apiservices.HomeService
 import com.damai.data.mappers.MovieGenreResponseToMovieGenreModelMapper
 import com.damai.data.mappers.MovieItemResponseToMovieItemModelMapper
+import com.damai.domain.models.MovieDetailsModel
 import com.damai.domain.models.MovieGenreListModel
 import com.damai.domain.models.MovieItemByGenreRequestModel
 import com.damai.domain.models.MovieItemListModel
@@ -64,6 +65,24 @@ class HomeRepositoryImpl(
                     list = response.results?.map {
                         movieItemMapper.map(it)
                     }
+                ).also {
+                    it.status = SUCCESS_CODE
+                }
+            }
+        }.asFlow()
+    }
+
+    override fun getMovieDetails(movieId: Int): Flow<Resource<MovieDetailsModel>> {
+        return object : NetworkResource<MovieDetailsModel>(
+            dispatcherProvider = dispatcher
+        ) {
+            override suspend fun remoteFetch(): MovieDetailsModel {
+                val response = homeService.getMovieDetails(
+                    movieId = movieId,
+                    language = QUERY_LANGUAGE_US_DEFAULT
+                )
+                return MovieDetailsModel(
+                    details = movieItemMapper.map(response)
                 ).also {
                     it.status = SUCCESS_CODE
                 }

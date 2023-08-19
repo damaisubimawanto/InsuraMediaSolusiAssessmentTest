@@ -1,6 +1,7 @@
 package com.damai.domain.repositories
 
 import com.damai.base.networks.Resource
+import com.damai.domain.models.MovieDetailsModel
 import com.damai.domain.models.MovieGenreListModel
 import com.damai.domain.models.MovieItemByGenreRequestModel
 import com.damai.domain.models.MovieItemListModel
@@ -19,4 +20,8 @@ interface HomeRepository {
     fun getMovieItemListByGenre(
         requestModel: MovieItemByGenreRequestModel
     ): Flow<Resource<MovieItemListModel>>
+
+    fun getMovieDetails(
+        movieId: Int
+    ): Flow<Resource<MovieDetailsModel>>
 }

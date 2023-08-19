@@ -18,9 +18,14 @@ class MovieItemResponseToMovieItemModelMapper : BaseMapper<MovieItemResponse, Mo
             originalTitle = value.originalTitle,
             title = value.title,
             overview = value.overview,
+            bannerPath = value.backdropPath,
             posterPath = value.posterPath,
             voteAverage = value.voteAverage.orZero(),
-            releaseDate = value.releaseDate
+            runtime = value.runtime.orZero(),
+            releaseDate = value.releaseDate,
+            genresText = value.genres?.joinToString(separator = " - ") {
+                it.name.orEmpty()
+            }
         )
     }
 }

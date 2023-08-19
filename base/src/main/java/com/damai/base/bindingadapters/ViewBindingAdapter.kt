@@ -36,6 +36,30 @@ object ViewBindingAdapter {
     }
 
     @JvmStatic
+    @BindingAdapter("movieYear")
+    fun bindMovieYear(view: AppCompatTextView, movieReleaseDate: String?) {
+        val movieDate = SimpleDateUtil.parseStringToDate(
+            givenDateString = movieReleaseDate.orEmpty(),
+            sourceFormat = SimpleDateUtil.DateFormat.YYYY_MM_DD
+        )
+        val movieYear = movieDate?.let {
+            SimpleDateUtil.parseDateToString(
+                givenDate = it,
+                outputFormat = SimpleDateUtil.DateFormat.YYYY
+            )
+        }.orEmpty()
+        val titleText = "($movieYear)"
+        view.text = titleText
+    }
+
+    @JvmStatic
+    @BindingAdapter("movieRuntime")
+    fun bindMovieRuntime(view: AppCompatTextView, movieRuntime: Int) {
+        val runtimeText = "$movieRuntime min"
+        view.text = runtimeText
+    }
+
+    @JvmStatic
     @BindingAdapter("movieRating")
     fun bindMovieRating(view: AppCompatTextView, movieRating: Double) {
         view.text = "$movieRating"

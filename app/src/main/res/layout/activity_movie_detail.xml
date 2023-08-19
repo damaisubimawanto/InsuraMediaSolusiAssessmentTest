@@ -1,12 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <import type="com.damai.base.bindingadapters.ViewBindingAdapter" />
+
+        <variable
+            name="vm"
+            type="com.damai.accordinnovations.ui.detail.MovieDetailViewModel" />
+
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivMovieBigBanner"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="1.779"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{vm.movieDetailsLiveData.bannerPath}"
+                tools:background="@color/dodger_blue" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvMovieThumbnail"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:cardCornerRadius="@dimen/dimen_8"
+                app:layout_constraintDimensionRatio="0.6667"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
+                app:layout_constraintTop_toTopOf="@+id/spaceTopBanner"
+                app:layout_constraintWidth_percent="0.3">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivMovieThumbnail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:loadImage="@{vm.movieDetailsLiveData.posterPath}"
+                    tools:background="@color/indian_red" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMovieTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineRightPadding"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
+                app:layout_constraintTop_toBottomOf="@+id/cvMovieThumbnail"
+                android:text="@{vm.movieDetailsLiveData.title}"
+                tools:text="Captain America" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvReleaseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RELEASE"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvRuntimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RUNTIME"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineRightPadding"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMovieRelease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
+                app:layout_constraintTop_toBottomOf="@+id/tvReleaseText"
+                app:movieYear="@{vm.movieDetailsLiveData.releaseDate}"
+                tools:text="(2012)" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMovieRuntime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineRightPadding"
+                app:layout_constraintTop_toBottomOf="@+id/tvRuntimeText"
+                app:movieRuntime="@{vm.movieDetailsLiveData.runtime}"
+                tools:text="152 min" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvGenreText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GENRE"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieRelease" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMovieGenres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{vm.movieDetailsLiveData.genresText}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineRightPadding"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
+                app:layout_constraintTop_toBottomOf="@+id/tvGenreText"
+                tools:text="Action - Sci-fi - Drama" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDescriptionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DESCRIPTION"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieGenres" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMovieDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{vm.movieDetailsLiveData.overview}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineRightPadding"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescriptionText"
+                tools:text="@tools:sample/lorem/random" />
+            
+            <Space
+                android:id="@+id/spaceTopBanner"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivMovieBigBanner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.15"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineLeftPadding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/dimen_8" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineRightPadding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/dimen_8" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </layout>

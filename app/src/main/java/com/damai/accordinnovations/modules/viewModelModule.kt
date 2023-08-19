@@ -1,5 +1,6 @@
 package com.damai.accordinnovations.modules
 
+import com.damai.accordinnovations.ui.detail.MovieDetailViewModel
 import com.damai.accordinnovations.ui.main.MainViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -15,6 +16,13 @@ val viewModelModule = module {
             app = androidApplication(),
             getMovieGenreListUseCase = get(),
             getMovieItemListUseCase = get(),
+            dispatcher = get()
+        )
+    }
+    viewModel {
+        MovieDetailViewModel(
+            app = androidApplication(),
+            getMovieDetailsUseCase = get(),
             dispatcher = get()
         )
     }

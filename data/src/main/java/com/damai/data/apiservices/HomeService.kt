@@ -1,6 +1,7 @@
 package com.damai.data.apiservices
 
 import com.damai.data.responses.MovieGenreListResponse
+import com.damai.data.responses.MovieItemResponse
 import com.damai.data.responses.MovieListResponse
 import com.damai.data.responses.MovieReviewListResponse
 import retrofit2.http.GET
@@ -33,4 +34,10 @@ interface HomeService {
         @Query("language") language: String,
         @Query("page") page: Int
     ): MovieReviewListResponse
+
+    @GET("/3/movie/{movie_id}")
+    suspend fun getMovieDetails(
+        @Path("movie_id") movieId: Int,
+        @Query("language") language: String
+    ): MovieItemResponse
 }

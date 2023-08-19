@@ -14,5 +14,13 @@ class MovieDetailActivity : BaseActivity<ActivityMovieDetailBinding, MovieDetail
 
     override val viewModel: MovieDetailViewModel by viewModel()
 
+    override fun ActivityMovieDetailBinding.viewInitialization() {
+        viewModel.initFromIntent(bundle = intent.extras)
+        vm = viewModel
+        lifecycleOwner = this@MovieDetailActivity
+    }
 
+    override fun ActivityMovieDetailBinding.onPreparationFinished() {
+        viewModel.getMovieDetails()
+    }
 }

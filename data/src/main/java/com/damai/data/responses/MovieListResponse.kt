@@ -62,7 +62,7 @@ class MovieItemResponse {
     var homepage: String? = null
 
     @SerializedName("imdb_id")
-    var imdbId: Int? = null
+    var imdbId: String? = null
 
     @SerializedName("production_companies")
     var productionCompanies: List<ProductionCompanyResponse>? = null
