@@ -3,4 +3,5 @@
     <string name="runtime" formatted="false">%d min</string>
     <string name="reviews_counter_many" formatted="false">%d\nReviews</string>
     <string name="reviews_counter_single" formatted="false">%d\nReview</string>
+    <string name="review_author_name" formatted="false">From: %s</string>
 </resources>

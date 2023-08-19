@@ -83,4 +83,11 @@ object ViewBindingAdapter {
         }
         view.text = reviewText
     }
+
+    @JvmStatic
+    @BindingAdapter("userReview")
+    fun bindUserReview(view: AppCompatTextView, username: String?) {
+        val userReviewText = view.resources.getString(R.string.review_author_name, username)
+        view.text = userReviewText
+    }
 }

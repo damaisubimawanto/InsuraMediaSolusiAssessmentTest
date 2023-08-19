@@ -5,6 +5,8 @@ import com.damai.domain.models.MovieDetailsModel
 import com.damai.domain.models.MovieGenreListModel
 import com.damai.domain.models.MovieItemByGenreRequestModel
 import com.damai.domain.models.MovieItemListModel
+import com.damai.domain.models.ReviewItemListModel
+import com.damai.domain.models.ReviewItemRequestModel
 import kotlinx.coroutines.flow.Flow
 import kotlin.jvm.Throws
 
@@ -24,4 +26,8 @@ interface HomeRepository {
     fun getMovieDetails(
         movieId: Int
     ): Flow<Resource<MovieDetailsModel>>
+
+    fun getMovieReviewList(
+        requestModel: ReviewItemRequestModel
+    ): Flow<Resource<ReviewItemListModel>>
 }

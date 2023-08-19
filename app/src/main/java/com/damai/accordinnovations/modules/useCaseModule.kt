@@ -3,6 +3,7 @@ package com.damai.accordinnovations.modules
 import com.damai.domain.usecases.GetMovieDetailsUseCase
 import com.damai.domain.usecases.GetMovieGenreListUseCase
 import com.damai.domain.usecases.GetMovieItemListUseCase
+import com.damai.domain.usecases.GetMovieReviewListUseCase
 import org.koin.dsl.module
 
 /**
@@ -22,6 +23,11 @@ val useCaseModule = module {
     }
     single {
         GetMovieDetailsUseCase(
+            homeRepository = get()
+        )
+    }
+    single {
+        GetMovieReviewListUseCase(
             homeRepository = get()
         )
     }

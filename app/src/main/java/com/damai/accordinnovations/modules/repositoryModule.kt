@@ -14,7 +14,8 @@ val repositoryModule = module {
             homeService = get(),
             dispatcher = get(),
             movieGenreMapper = get(),
-            movieItemMapper = get()
+            movieItemMapper = get(),
+            reviewItemMapper = get()
         )
     }
 }

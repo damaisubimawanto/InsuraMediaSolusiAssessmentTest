@@ -23,6 +23,7 @@ val viewModelModule = module {
         MovieDetailViewModel(
             app = androidApplication(),
             getMovieDetailsUseCase = get(),
+            getMovieReviewsUseCase = get(),
             dispatcher = get()
         )
     }
