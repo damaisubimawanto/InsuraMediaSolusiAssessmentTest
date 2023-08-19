@@ -2,6 +2,7 @@ package com.damai.accordinnovations.ui.main
 
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.damai.accordinnovations.R
 import com.damai.accordinnovations.databinding.ActivityMainBinding
 import com.damai.accordinnovations.navigations.PageNavigationApi
@@ -10,6 +11,7 @@ import com.damai.accordinnovations.ui.main.adapters.MovieAdapter
 import com.damai.accordinnovations.ui.main.adapters.MovieAdapter.Companion.FOOTER_ITEM
 import com.damai.base.BaseActivity
 import com.damai.base.extensions.observe
+import com.damai.base.utils.EndlessScrollListener
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,6 +27,18 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             /* Do nothing. */
         }
+
+    private val mEndlessScrollListener: EndlessScrollListener by lazy {
+        object : EndlessScrollListener(
+            layoutManager = requireNotNull(binding.rvMovies.layoutManager),
+            visibleThreshold = 3
+        ) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                viewModel.changeCurrentPage(newPage = page)
+                viewModel.getMovieList()
+            }
+        }
+    }
     //endregion `Variables`
 
     override val layoutResource: Int = R.layout.activity_main
@@ -60,6 +74,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
             layoutManager = gridLayoutManager
             adapter = mMovieAdapter
+            clearOnScrollListeners()
+            addOnScrollListener(mEndlessScrollListener)
         }
     }
 

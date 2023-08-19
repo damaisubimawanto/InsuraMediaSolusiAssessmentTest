@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.damai.base.BaseViewModel
 import com.damai.base.coroutines.DispatcherProvider
 import com.damai.base.extensions.asLiveData
+import com.damai.base.extensions.orZero
 import com.damai.base.networks.Resource
 import com.damai.domain.models.MovieGenreModel
 import com.damai.domain.models.MovieItemByGenreRequestModel
@@ -66,12 +67,24 @@ class MainViewModel(
                 when (resource) {
                     is Resource.Success -> {
                         resource.model?.list?.let { response ->
-                            val newData = mutableListOf<MovieUiModel>()
-                            response.forEach {
-                                newData.add(MovieUiModel.MovieItemWrap(it))
+                            var currentData = _movieListLiveData.value?.toMutableList()
+                            if (currentData == null) {
+                                currentData = mutableListOf()
                             }
-                            newData.add(MovieUiModel.MovieFooterLoading)
-                            _movieListLiveData.postValue(newData)
+                            currentData.removeAll {
+                                it is MovieUiModel.MovieFooterLoading
+                            }
+                            response.forEach {
+                                currentData.add(MovieUiModel.MovieItemWrap(it))
+                            }
+
+                            resource.model?.let { model ->
+                                if (model.currentPage.orZero() < model.totalPage.orZero()) {
+                                    currentData.add(MovieUiModel.MovieFooterLoading)
+                                }
+                            }
+
+                            _movieListLiveData.postValue(currentData.toList())
                         }
                     }
                     is Resource.Error -> {
@@ -82,8 +95,8 @@ class MainViewModel(
         }
     }
 
-    fun incrementCurrentPage() {
-        currentPage++
+    fun changeCurrentPage(newPage: Int) {
+        currentPage = newPage
     }
 
     fun resetCurrentPage() {

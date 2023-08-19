@@ -1,13 +1,15 @@
 package com.damai.base.utils
 
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 
 /**
  * Created by damai007 on 18/August/2023
  */
 abstract class EndlessScrollListener(
-    private val layoutManager: LinearLayoutManager,
+    private val layoutManager: LayoutManager,
     private val visibleThreshold: Int = 2
 ) : RecyclerView.OnScrollListener() {
 
@@ -17,7 +19,15 @@ abstract class EndlessScrollListener(
 
     override fun onScrolled(view: RecyclerView, dx: Int, dy: Int) {
         val totalItemCount = layoutManager.itemCount
-        val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+        val lastVisibleItemPosition = when (layoutManager) {
+            is GridLayoutManager -> {
+                layoutManager.findLastCompletelyVisibleItemPosition()
+            }
+            is LinearLayoutManager -> {
+                layoutManager.findLastVisibleItemPosition()
+            }
+            else -> throw IllegalArgumentException("Possible layout manager are only GridLayoutManager and LinearLayoutManager")
+        }
 
         // If the total item count is zero and the previous isn't, assume the
         // list is invalidated and should be reset back to initial state
