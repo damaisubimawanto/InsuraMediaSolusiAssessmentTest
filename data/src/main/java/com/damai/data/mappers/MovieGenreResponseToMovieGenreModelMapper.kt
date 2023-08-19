@@ -13,7 +13,8 @@ class MovieGenreResponseToMovieGenreModelMapper : BaseMapper<MovieGenreResponse,
     override fun map(value: MovieGenreResponse): MovieGenreModel {
         return MovieGenreModel(
             id = value.id.orZero(),
-            name = value.name.orEmpty()
+            name = value.name.orEmpty(),
+            isSelected = false
         )
     }
 }

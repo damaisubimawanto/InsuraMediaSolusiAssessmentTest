@@ -47,8 +47,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun ActivityMainBinding.viewInitialization() {
         with(rvGenres) {
-            mGenreAdapter = GenreAdapter {
-                // TODO: Handle click on genre tab item
+            mGenreAdapter = GenreAdapter { genreModel ->
+                viewModel.changeGenre(genreId = genreModel.id) {
+                    mEndlessScrollListener.resetScrolling()
+                }
             }
             adapter = mGenreAdapter
         }
@@ -85,6 +87,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
 
         observe(viewModel.movieListLiveData) {
+            if (viewModel.isMovieListReset) {
+                viewModel.isMovieListReset = false
+                mMovieAdapter.submitList(null)
+            }
             mMovieAdapter.submitList(it)
         }
     }

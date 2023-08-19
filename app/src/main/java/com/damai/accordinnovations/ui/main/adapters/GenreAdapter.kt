@@ -38,7 +38,10 @@ class GenreAdapter(
 
         override fun bind(data: MovieGenreModel) {
             with(binding) {
-                tvGenreName.text = data.name
+                model = data
+                if (hasPendingBindings()) {
+                    executePendingBindings()
+                }
 
                 tvGenreName.setCustomOnClickListener {
                     clickCallback.invoke(data)

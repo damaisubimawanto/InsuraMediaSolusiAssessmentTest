@@ -11,5 +11,6 @@ data class MovieGenreListModel(
 
 data class MovieGenreModel(
     val id: Int,
-    val name: String
+    val name: String,
+    var isSelected: Boolean
 )

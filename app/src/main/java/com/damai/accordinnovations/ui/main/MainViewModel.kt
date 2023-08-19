@@ -36,6 +36,7 @@ class MainViewModel(
     //region Variables
     private var selectedGenreName = ""
     private var currentPage = 1
+    var isMovieListReset = false
     //endregion `Variables`
 
     fun getGenreList() {
@@ -44,8 +45,9 @@ class MainViewModel(
                 when (resource) {
                     is Resource.Success -> {
                         resource.model?.list?.let { response ->
+                            response.firstOrNull()?.isSelected = true
                             _genreListLiveData.postValue(response)
-                            selectedGenreName = response.firstOrNull()?.name.orEmpty()
+                            selectedGenreName = response.firstOrNull()?.id.orZero().toString()
                             getMovieList()
                         }
                     }
@@ -95,11 +97,35 @@ class MainViewModel(
         }
     }
 
+    fun changeGenre(
+        genreId: Int,
+        changedCallback: () -> Unit
+    ) {
+        val currentData = _genreListLiveData.value
+        currentData?.forEach {
+            it.isSelected = false
+        }
+
+        currentData?.find {
+            it.id == genreId
+        }?.let {
+            it.isSelected = true
+            selectedGenreName = it.id.toString()
+            isMovieListReset = true
+            resetMovieList()
+            changedCallback.invoke()
+            getMovieList()
+        }
+
+        currentData?.let(_genreListLiveData::postValue)
+    }
+
     fun changeCurrentPage(newPage: Int) {
         currentPage = newPage
     }
 
-    fun resetCurrentPage() {
+    private fun resetMovieList() {
         currentPage = 1
+        _movieListLiveData.value = listOf()
     }
 }
