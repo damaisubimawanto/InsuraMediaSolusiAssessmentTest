@@ -1,2 +1,2 @@
-# AccordInnovationsCodingTest
-This project is for technical test in Accord Innovations
+# InsuraMediaSolusiAssessmentTest
+This project is for technical test in Insura Media Solusi Assessment.
