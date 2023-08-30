@@ -31,9 +31,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private val mEndlessScrollListener: EndlessScrollListener by lazy {
         object : EndlessScrollListener(
             layoutManager = requireNotNull(binding.rvMovies.layoutManager),
-            visibleThreshold = 3
+            visibleThreshold = 5
         ) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                if (viewModel.isStopLoadMore) return
                 viewModel.changeCurrentPage(newPage = page)
                 viewModel.getMovieList()
             }

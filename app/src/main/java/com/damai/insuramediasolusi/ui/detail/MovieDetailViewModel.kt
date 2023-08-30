@@ -10,6 +10,7 @@ import com.damai.base.extensions.asLiveData
 import com.damai.base.extensions.orZero
 import com.damai.base.networks.Resource
 import com.damai.base.utils.Constants.ARGS_MOVIE_ID
+import com.damai.base.utils.Event
 import com.damai.base.utils.MovieType
 import com.damai.domain.models.MovieItemModel
 import com.damai.domain.models.MovieVideoModel
@@ -43,11 +44,21 @@ class MovieDetailViewModel(
 
     private val _trailerMovieLiveData = MutableLiveData<MovieVideoModel?>()
     val trailerMovieLiveData = _trailerMovieLiveData.asLiveData()
+
+    private val _errorMovieDetailsLiveData = MutableLiveData<Event<Pair<Boolean, String?>>>()
+    val errorMovieDetailsLiveData = _errorMovieDetailsLiveData.asLiveData()
+
+    private val _errorMovieReviewsLiveData = MutableLiveData<Event<Pair<Boolean, String?>>>()
+    val errorMovieReviewsLiveData = _errorMovieReviewsLiveData.asLiveData()
     //endregion `Live Data`
 
     //region Variables
     private var movieId = 0
     private var reviewCurrentPage = 1
+    private var totalReviewPage = 1
+
+    val isStopLoadMore: Boolean
+        get() = reviewCurrentPage >= totalReviewPage
     //endregion `Variables`
 
     fun initFromIntent(bundle: Bundle?) {
@@ -68,7 +79,9 @@ class MovieDetailViewModel(
                         }
                     }
                     is Resource.Error -> {
-
+                        Event(
+                            Pair(true, resource.errorMessage)
+                        ).let(_errorMovieDetailsLiveData::postValue)
                     }
                 }
             }
@@ -97,6 +110,7 @@ class MovieDetailViewModel(
                             }
 
                             resource.model?.let { model ->
+                                totalReviewPage = model.totalPage.orZero()
                                 if (model.currentPage.orZero() < model.totalPage.orZero()) {
                                     currentData.add(ReviewUiModel.ReviewFooterLoading)
                                 }
@@ -106,7 +120,9 @@ class MovieDetailViewModel(
                         }
                     }
                     is Resource.Error -> {
-
+                        Event(
+                            Pair(true, resource.errorMessage)
+                        ).let(_errorMovieReviewsLiveData::postValue)
                     }
                 }
             }
@@ -122,7 +138,7 @@ class MovieDetailViewModel(
             getMovieReviewsUseCase(requestModel).collect { resource ->
                 when (resource) {
                     is Resource.Success -> {
-                        resource.model?.list?.size?.let(
+                        resource.model?.totalResult?.let(
                             _movieReviewsCountLiveData::postValue
                         ) ?: _movieReviewsCountLiveData.postValue(0)
                     }

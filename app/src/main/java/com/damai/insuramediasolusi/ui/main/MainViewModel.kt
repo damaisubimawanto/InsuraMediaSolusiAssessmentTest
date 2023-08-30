@@ -36,7 +36,11 @@ class MainViewModel(
     //region Variables
     private var selectedGenreName = ""
     private var currentPage = 1
+    private var totalPage = 1
     var isMovieListReset = false
+
+    val isStopLoadMore: Boolean
+        get() = currentPage >= totalPage
     //endregion `Variables`
 
     fun getGenreList() {
@@ -81,6 +85,7 @@ class MainViewModel(
                             }
 
                             resource.model?.let { model ->
+                                totalPage = model.totalPage.orZero()
                                 if (model.currentPage.orZero() < model.totalPage.orZero()) {
                                     currentData.add(MovieUiModel.MovieFooterLoading)
                                 }

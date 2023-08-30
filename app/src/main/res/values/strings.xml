@@ -7,4 +7,7 @@
     <string name="watch_trailer_text">Watch\nTrailer</string>
 
     <string name="empty_review_message">There is no review yet.</string>
+
+    <string name="error_movie_details">Cannot load the movie details</string>
+    <string name="error_movie_reviews">Cannot load the movie reviews</string>
 </resources>

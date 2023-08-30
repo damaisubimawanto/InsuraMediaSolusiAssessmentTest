@@ -8,7 +8,9 @@ import com.damai.insuramediasolusi.ui.review.adapters.ReviewAdapter
 import com.damai.base.BaseBottomSheetDialogFragment
 import com.damai.base.extensions.getScreenHeight
 import com.damai.base.extensions.observe
+import com.damai.base.extensions.showShortToast
 import com.damai.base.utils.EndlessScrollListener
+import com.damai.base.utils.EventObserver
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 /**
@@ -25,6 +27,7 @@ class MovieReviewsBottomSheetDialog : BaseBottomSheetDialogFragment<FragmentMovi
             visibleThreshold = 5
         ) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                if (viewModel.isStopLoadMore) return
                 viewModel.changeReviewCurrentPage(newPage = page)
                 viewModel.getMovieReviews()
             }
@@ -59,6 +62,17 @@ class MovieReviewsBottomSheetDialog : BaseBottomSheetDialogFragment<FragmentMovi
         observe(viewModel.movieReviewsLiveData) {
             mReviewAdapter.submitList(it)
         }
+
+        observe(viewModel.errorMovieReviewsLiveData, EventObserver { errorPair ->
+            if (errorPair.first) {
+                val message = if (errorPair.second.isNullOrBlank()) {
+                    getString(R.string.error_movie_reviews)
+                } else {
+                    requireNotNull(errorPair.second)
+                }
+                context?.showShortToast(message = message)
+            }
+        })
     }
 
     override fun FragmentMovieReviewsBinding.onPreparationFinished() {

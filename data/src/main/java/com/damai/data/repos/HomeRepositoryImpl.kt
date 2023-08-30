@@ -113,6 +113,7 @@ class HomeRepositoryImpl(
                     it.status = SUCCESS_CODE
                     it.currentPage = response.page
                     it.totalPage = response.totalPages
+                    it.totalResult = response.totalResults
                 }
             }
         }.asFlow()

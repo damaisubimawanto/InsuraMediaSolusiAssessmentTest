@@ -8,4 +8,5 @@ open class BaseModel {
     var message: String? = null
     var currentPage: Int? = null
     var totalPage: Int? = null
+    var totalResult: Int? = null
 }
