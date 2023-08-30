@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.graphics.Typeface" />
+
         <import type="android.view.View" />
 
         <variable
@@ -27,6 +29,7 @@
             android:text="@{model.name}"
             android:textColor="@color/floral_white"
             android:textSize="@dimen/font_14"
+            android:typeface="@{Typeface.defaultFromStyle(model.selected ? Typeface.BOLD : Typeface.NORMAL)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
