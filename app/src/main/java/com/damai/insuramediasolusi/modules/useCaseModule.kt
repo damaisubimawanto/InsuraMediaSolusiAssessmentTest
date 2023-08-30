@@ -4,6 +4,7 @@ import com.damai.domain.usecases.GetMovieDetailsUseCase
 import com.damai.domain.usecases.GetMovieGenreListUseCase
 import com.damai.domain.usecases.GetMovieItemListUseCase
 import com.damai.domain.usecases.GetMovieReviewListUseCase
+import com.damai.domain.usecases.GetMovieVideosUseCase
 import org.koin.dsl.module
 
 /**
@@ -28,6 +29,11 @@ val useCaseModule = module {
     }
     single {
         GetMovieReviewListUseCase(
+            homeRepository = get()
+        )
+    }
+    single {
+        GetMovieVideosUseCase(
             homeRepository = get()
         )
     }

@@ -10,11 +10,14 @@ import com.damai.base.extensions.asLiveData
 import com.damai.base.extensions.orZero
 import com.damai.base.networks.Resource
 import com.damai.base.utils.Constants.ARGS_MOVIE_ID
+import com.damai.base.utils.MovieType
 import com.damai.domain.models.MovieItemModel
+import com.damai.domain.models.MovieVideoModel
 import com.damai.domain.models.ReviewItemRequestModel
 import com.damai.domain.models.ReviewUiModel
 import com.damai.domain.usecases.GetMovieDetailsUseCase
 import com.damai.domain.usecases.GetMovieReviewListUseCase
+import com.damai.domain.usecases.GetMovieVideosUseCase
 import kotlinx.coroutines.launch
 
 /**
@@ -24,6 +27,7 @@ class MovieDetailViewModel(
     app: Application,
     private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
     private val getMovieReviewsUseCase: GetMovieReviewListUseCase,
+    private val getMovieVideosUseCase: GetMovieVideosUseCase,
     private val dispatcher: DispatcherProvider
 ) : BaseViewModel(app = app) {
 
@@ -33,6 +37,9 @@ class MovieDetailViewModel(
 
     private val _movieReviewsLiveData = MutableLiveData<List<ReviewUiModel>>()
     val movieReviewsLiveData = _movieReviewsLiveData.asLiveData()
+
+    private val _trailerMovieLiveData = MutableLiveData<MovieVideoModel?>()
+    val trailerMovieLiveData = _trailerMovieLiveData.asLiveData()
     //endregion `Live Data`
 
     //region Variables
@@ -98,6 +105,23 @@ class MovieDetailViewModel(
                     is Resource.Error -> {
 
                     }
+                }
+            }
+        }
+    }
+
+    fun getMovieVideos() {
+        viewModelScope.launch(dispatcher.io()) {
+            getMovieVideosUseCase(movieId).collect { resource ->
+                when (resource) {
+                    is Resource.Success -> {
+                        resource.model?.list?.let { response ->
+                            response.find { movieVideo ->
+                                movieVideo.type == MovieType.Trailer.type
+                            }?.let(_trailerMovieLiveData::postValue)
+                        }
+                    }
+                    is Resource.Error -> Unit
                 }
             }
         }

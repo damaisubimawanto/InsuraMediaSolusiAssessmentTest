@@ -1,7 +1,12 @@
 package com.damai.base.extensions
 
+import android.content.res.ColorStateList
 import android.view.View
+import androidx.annotation.ColorRes
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
+import androidx.core.widget.ImageViewCompat
 import com.bumptech.glide.Glide
 
 /**
@@ -36,4 +41,19 @@ fun AppCompatImageView.loadImageWithCenterCrop(
         .load(url)
         .centerCrop()
         .into(this)
+}
+
+fun AppCompatImageView.setCustomTint(
+    @ColorRes colorRes: Int
+) {
+    ImageViewCompat.setImageTintList(
+        this,
+        ColorStateList.valueOf(ContextCompat.getColor(context, colorRes))
+    )
+}
+
+fun AppCompatTextView.setCustomTextColor(
+    @ColorRes colorRes: Int
+) {
+    setTextColor(ContextCompat.getColor(context, colorRes))
 }

@@ -16,12 +16,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/grey_bg"
         android:fitsSystemWindows="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/grey_bg">
+            android:paddingBottom="@dimen/dimen_8">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivMovieBigBanner"
@@ -40,7 +41,7 @@
                 android:layout_height="0dp"
                 app:cardCornerRadius="@dimen/dimen_8"
                 app:cardElevation="@dimen/dimen_8"
-                app:cardMaxElevation="@dimen/dimen_8"
+                app:cardMaxElevation="@dimen/dimen_16"
                 app:layout_constraintDimensionRatio="0.6667"
                 app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
                 app:layout_constraintTop_toTopOf="@+id/spaceTopBanner"
@@ -59,9 +60,10 @@
                 android:id="@+id/clMovieReviewCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:padding="@dimen/dimen_8"
                 app:layout_constraintBottom_toBottomOf="@+id/cvMovieThumbnail"
-                app:layout_constraintEnd_toStartOf="@+id/guidelineRightPadding"
+                app:layout_constraintEnd_toStartOf="@+id/clTrailerMovieVideo"
                 app:layout_constraintStart_toEndOf="@+id/cvMovieThumbnail"
                 app:layout_constraintTop_toBottomOf="@+id/ivMovieBigBanner">
 
@@ -91,6 +93,42 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clTrailerMovieVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:padding="@dimen/dimen_8"
+                app:layout_constraintBottom_toBottomOf="@+id/cvMovieThumbnail"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineRightPadding"
+                app:layout_constraintStart_toEndOf="@+id/clMovieReviewCount"
+                app:layout_constraintTop_toBottomOf="@+id/ivMovieBigBanner">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivTrailerMovieVideo"
+                    android:layout_width="@dimen/dimen_24"
+                    android:layout_height="@dimen/dimen_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_play_circle_24px"
+                    app:tint="@color/dim_gray" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTrailerMovieVideo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="@dimen/dimen_4"
+                    android:text="@string/watch_trailer_text"
+                    android:textColor="@color/dim_gray"
+                    android:textSize="@dimen/font_14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivTrailerMovieVideo" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <Space
                 android:id="@+id/spaceBetweenMovieThumbnailAndTitle"
                 android:layout_width="wrap_content"
@@ -102,7 +140,7 @@
                 android:id="@+id/viewBgDetails"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@color/dark_olive_green"
+                android:background="@drawable/bg_rectangle_rounded_black"
                 app:layout_constraintBottom_toBottomOf="@+id/tvMovieDescription"
                 app:layout_constraintEnd_toEndOf="@+id/tvMovieTitle"
                 app:layout_constraintStart_toStartOf="@+id/tvMovieTitle"
@@ -112,28 +150,29 @@
                 android:id="@+id/tvMovieTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/black"
                 android:paddingHorizontal="@dimen/dimen_12"
                 android:paddingVertical="@dimen/dimen_8"
                 android:textColor="@color/white"
+                android:text="@{vm.movieDetailsLiveData.title}"
                 android:textSize="@dimen/font_18"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineRightPadding"
                 app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
                 app:layout_constraintTop_toBottomOf="@+id/spaceBetweenMovieThumbnailAndTitle"
-                android:text="@{vm.movieDetailsLiveData.title}"
                 tools:text="Captain America" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvReleaseText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@color/dark_olive_green"
                 android:paddingHorizontal="@dimen/dimen_6"
                 android:paddingVertical="@dimen/dimen_8"
                 android:text="@string/release_text"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_12"
+                app:layout_constraintEnd_toStartOf="@+id/tvRuntimeText"
                 app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
                 app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle" />
 
@@ -141,6 +180,7 @@
                 android:id="@+id/tvRuntimeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/dark_olive_green"
                 android:paddingHorizontal="@dimen/dimen_6"
                 android:paddingVertical="@dimen/dimen_8"
                 android:text="@string/runtime_text"
@@ -152,14 +192,12 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvMovieRelease"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/black"
                 android:paddingHorizontal="@dimen/dimen_12"
                 android:paddingVertical="@dimen/dimen_8"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_12"
-                app:layout_constraintEnd_toStartOf="@+id/tvMovieRuntime"
                 app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
                 app:layout_constraintTop_toBottomOf="@+id/tvReleaseText"
                 app:movieYear="@{vm.movieDetailsLiveData.releaseDate}"
@@ -167,30 +205,29 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvMovieRuntime"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/black"
-                android:gravity="end"
                 android:paddingHorizontal="@dimen/dimen_12"
                 android:paddingVertical="@dimen/dimen_8"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_12"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineRightPadding"
-                app:layout_constraintStart_toEndOf="@+id/tvMovieRelease"
                 app:layout_constraintTop_toBottomOf="@+id/tvRuntimeText"
                 app:movieRuntime="@{vm.movieDetailsLiveData.runtime}"
                 tools:text="152 min" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvGenreText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@color/dark_olive_green"
                 android:paddingHorizontal="@dimen/dimen_6"
                 android:paddingVertical="@dimen/dimen_8"
                 android:text="@string/genre_text"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_12"
+                app:layout_constraintEnd_toEndOf="@+id/guidelineRightPadding"
                 app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
                 app:layout_constraintTop_toBottomOf="@+id/tvMovieRelease" />
 
@@ -198,7 +235,6 @@
                 android:id="@+id/tvMovieGenres"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/black"
                 android:paddingHorizontal="@dimen/dimen_12"
                 android:paddingVertical="@dimen/dimen_8"
                 android:text="@{vm.movieDetailsLiveData.genresText}"
@@ -211,14 +247,16 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDescriptionText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@color/dark_olive_green"
                 android:paddingHorizontal="@dimen/dimen_6"
                 android:paddingVertical="@dimen/dimen_8"
                 android:text="@string/description_text"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_12"
+                app:layout_constraintEnd_toStartOf="@id/guidelineRightPadding"
                 app:layout_constraintStart_toEndOf="@+id/guidelineLeftPadding"
                 app:layout_constraintTop_toBottomOf="@+id/tvMovieGenres" />
 
@@ -226,7 +264,6 @@
                 android:id="@+id/tvMovieDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/black"
                 android:lineSpacingExtra="3sp"
                 android:paddingHorizontal="@dimen/dimen_12"
                 android:paddingVertical="@dimen/dimen_8"

@@ -10,11 +10,13 @@ import com.damai.base.utils.Constants.SUCCESS_CODE
 import com.damai.data.apiservices.HomeService
 import com.damai.data.mappers.MovieGenreResponseToMovieGenreModelMapper
 import com.damai.data.mappers.MovieItemResponseToMovieItemModelMapper
+import com.damai.data.mappers.MovieVideoResponseToMovieVideoModelMapper
 import com.damai.data.mappers.ReviewItemResponseToReviewItemModelMapper
 import com.damai.domain.models.MovieDetailsModel
 import com.damai.domain.models.MovieGenreListModel
 import com.damai.domain.models.MovieItemByGenreRequestModel
 import com.damai.domain.models.MovieItemListModel
+import com.damai.domain.models.MovieVideoListModel
 import com.damai.domain.models.ReviewItemListModel
 import com.damai.domain.models.ReviewItemRequestModel
 import com.damai.domain.repositories.HomeRepository
@@ -28,6 +30,7 @@ class HomeRepositoryImpl(
     private val dispatcher: DispatcherProvider,
     private val movieGenreMapper: MovieGenreResponseToMovieGenreModelMapper,
     private val movieItemMapper: MovieItemResponseToMovieItemModelMapper,
+    private val movieVideoMapper: MovieVideoResponseToMovieVideoModelMapper,
     private val reviewItemMapper: ReviewItemResponseToReviewItemModelMapper
 ) : HomeRepository {
 
@@ -40,9 +43,7 @@ class HomeRepositoryImpl(
                     language = QUERY_LANGUAGE_DEFAULT
                 )
                 return MovieGenreListModel(
-                    list = response.genres?.map {
-                        movieGenreMapper.map(it)
-                    }
+                    list = response.genres?.let(movieGenreMapper::map)
                 ).also {
                     it.status = SUCCESS_CODE
                 }
@@ -62,13 +63,11 @@ class HomeRepositoryImpl(
                     sortBy = QUERY_SORT_BY_DEFAULT,
                     language = QUERY_LANGUAGE_US_DEFAULT,
                     includeAdult = false,
-                    includeVideo = false,
+                    includeVideo = true,
                     page = requestModel.page
                 )
                 return MovieItemListModel(
-                    list = response.results?.map {
-                        movieItemMapper.map(it)
-                    }
+                    list = response.results?.let(movieItemMapper::map)
                 ).also {
                     it.status = SUCCESS_CODE
                     it.currentPage = response.page
@@ -109,13 +108,29 @@ class HomeRepositoryImpl(
                     page = requestModel.page
                 )
                 return ReviewItemListModel(
-                    list = response.results?.map {
-                        reviewItemMapper.map(it)
-                    }
+                    list = response.results?.let(reviewItemMapper::map)
                 ).also {
                     it.status = SUCCESS_CODE
                     it.currentPage = response.page
                     it.totalPage = response.totalPages
+                }
+            }
+        }.asFlow()
+    }
+
+    override fun getMovieVideos(movieId: Int): Flow<Resource<MovieVideoListModel>> {
+        return object : NetworkResource<MovieVideoListModel>(
+            dispatcherProvider = dispatcher
+        ) {
+            override suspend fun remoteFetch(): MovieVideoListModel {
+                val response = homeService.getMovieVideos(
+                    movieId = movieId,
+                    language = QUERY_LANGUAGE_US_DEFAULT
+                )
+                return MovieVideoListModel(
+                    list = response.results?.let(movieVideoMapper::map)
+                ).also {
+                    it.status = SUCCESS_CODE
                 }
             }
         }.asFlow()

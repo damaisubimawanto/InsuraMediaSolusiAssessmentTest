@@ -15,6 +15,7 @@ val repositoryModule = module {
             dispatcher = get(),
             movieGenreMapper = get(),
             movieItemMapper = get(),
+            movieVideoMapper = get(),
             reviewItemMapper = get()
         )
     }

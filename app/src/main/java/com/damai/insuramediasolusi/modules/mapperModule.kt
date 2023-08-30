@@ -2,6 +2,7 @@ package com.damai.insuramediasolusi.modules
 
 import com.damai.data.mappers.MovieGenreResponseToMovieGenreModelMapper
 import com.damai.data.mappers.MovieItemResponseToMovieItemModelMapper
+import com.damai.data.mappers.MovieVideoResponseToMovieVideoModelMapper
 import com.damai.data.mappers.ReviewItemResponseToReviewItemModelMapper
 import org.koin.dsl.module
 
@@ -18,5 +19,8 @@ val mapperModule = module {
     }
     factory {
         ReviewItemResponseToReviewItemModelMapper()
+    }
+    factory {
+        MovieVideoResponseToMovieVideoModelMapper()
     }
 }

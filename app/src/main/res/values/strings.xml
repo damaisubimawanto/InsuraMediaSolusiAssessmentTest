@@ -4,4 +4,5 @@
     <string name="runtime_text">Runtime</string>
     <string name="genre_text">Genre</string>
     <string name="description_text">Description</string>
+    <string name="watch_trailer_text">Watch\nTrailer</string>
 </resources>

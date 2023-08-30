@@ -5,6 +5,7 @@ import com.damai.domain.models.MovieDetailsModel
 import com.damai.domain.models.MovieGenreListModel
 import com.damai.domain.models.MovieItemByGenreRequestModel
 import com.damai.domain.models.MovieItemListModel
+import com.damai.domain.models.MovieVideoListModel
 import com.damai.domain.models.ReviewItemListModel
 import com.damai.domain.models.ReviewItemRequestModel
 import kotlinx.coroutines.flow.Flow
@@ -32,4 +33,9 @@ interface HomeRepository {
     fun getMovieReviewList(
         requestModel: ReviewItemRequestModel
     ): Flow<Resource<ReviewItemListModel>>
+
+    @Throws(Exception::class)
+    fun getMovieVideos(
+        movieId: Int
+    ): Flow<Resource<MovieVideoListModel>>
 }

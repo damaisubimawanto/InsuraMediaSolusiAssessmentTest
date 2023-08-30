@@ -4,7 +4,12 @@ import com.damai.insuramediasolusi.R
 import com.damai.insuramediasolusi.databinding.ActivityMovieDetailBinding
 import com.damai.insuramediasolusi.ui.review.MovieReviewsBottomSheetDialog
 import com.damai.base.BaseActivity
+import com.damai.base.extensions.observe
 import com.damai.base.extensions.setCustomOnClickListener
+import com.damai.base.extensions.setCustomTextColor
+import com.damai.base.extensions.setCustomTint
+import com.damai.base.utils.IntentUtil
+import com.damai.base.utils.VideoPlatformType
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -32,8 +37,40 @@ class MovieDetailActivity : BaseActivity<ActivityMovieDetailBinding, MovieDetail
         }
     }
 
+    override fun ActivityMovieDetailBinding.setupObservers() {
+        observe(viewModel.trailerMovieLiveData) { trailerMovie ->
+            if (trailerMovie == null || trailerMovie.key.isNullOrEmpty()) {
+                ivTrailerMovieVideo.setCustomTint(colorRes = R.color.dim_gray)
+                tvTrailerMovieVideo.setCustomTextColor(colorRes = R.color.dim_gray)
+                clTrailerMovieVideo.setOnClickListener(null)
+            } else {
+                ivTrailerMovieVideo.setCustomTint(colorRes = R.color.yellow)
+                tvTrailerMovieVideo.setCustomTextColor(colorRes = R.color.white)
+
+                clTrailerMovieVideo.setCustomOnClickListener {
+                    when (trailerMovie.site) {
+                        VideoPlatformType.Youtube.type -> {
+                            IntentUtil.openYoutubeApp(
+                                context = this@MovieDetailActivity,
+                                youtubeId = requireNotNull(trailerMovie.key)
+                            )
+                        }
+                        VideoPlatformType.Vimeo.type -> {
+                            IntentUtil.openVimeoApp(
+                                context = this@MovieDetailActivity,
+                                vimeoId = requireNotNull(trailerMovie.key)
+                            )
+                        }
+                        else -> Unit
+                    }
+                }
+            }
+        }
+    }
+
     override fun ActivityMovieDetailBinding.onPreparationFinished() {
         viewModel.getMovieDetails()
+        viewModel.getMovieVideos()
     }
 
     override fun isRemoveFitsSystemWindows(): Boolean = true
