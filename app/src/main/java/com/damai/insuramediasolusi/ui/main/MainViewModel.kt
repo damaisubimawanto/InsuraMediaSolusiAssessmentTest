@@ -99,25 +99,36 @@ class MainViewModel(
 
     fun changeGenre(
         genreId: Int,
-        changedCallback: () -> Unit
+        changedCallback: (selectedPosition: Int) -> Unit
     ) {
-        val currentData = _genreListLiveData.value
-        currentData?.forEach {
-            it.isSelected = false
+        val currentData = requireNotNull(_genreListLiveData.value)
+
+        /* Get index of currently selected genre. */
+        val currentSelectedIndex = currentData.indexOfFirst {
+            it.isSelected
         }
 
-        currentData?.find {
+        /* Get index of new selected genre. */
+        val newSelectedIndex = currentData.indexOfFirst {
             it.id == genreId
-        }?.let {
-            it.isSelected = true
-            selectedGenreName = it.id.toString()
-            isMovieListReset = true
-            resetMovieList()
-            changedCallback.invoke()
-            getMovieList()
         }
 
-        currentData?.let(_genreListLiveData::postValue)
+        if (newSelectedIndex > -1 && newSelectedIndex != currentSelectedIndex) {
+            /* Set previous selected genre to be not-selected. */
+            currentData[currentSelectedIndex].isSelected = false
+
+            /* Set new genre to be selected. */
+            currentData[newSelectedIndex].let {
+                it.isSelected = true
+                selectedGenreName = it.id.toString()
+                isMovieListReset = true
+                resetMovieList()
+                changedCallback.invoke(newSelectedIndex)
+                getMovieList()
+            }
+        }
+
+        currentData.let(_genreListLiveData::postValue)
     }
 
     fun changeCurrentPage(newPage: Int) {

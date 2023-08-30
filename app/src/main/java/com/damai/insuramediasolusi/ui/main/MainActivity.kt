@@ -48,8 +48,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun ActivityMainBinding.viewInitialization() {
         with(rvGenres) {
             mGenreAdapter = GenreAdapter { genreModel ->
-                viewModel.changeGenre(genreId = genreModel.id) {
+                viewModel.changeGenre(genreId = genreModel.id) { selectedPosition ->
                     mEndlessScrollListener.resetScrolling()
+                    rvGenres.smoothScrollToPosition(selectedPosition)
                 }
             }
             adapter = mGenreAdapter
