@@ -38,7 +38,11 @@ class MovieReviewsBottomSheetDialog : BaseBottomSheetDialogFragment<FragmentMovi
 
     override fun onStart() {
         super.onStart()
-        setBottomSheetFullScreen(getScreenHeight(), binding.root)
+        setBottomSheetFullScreen(
+            height = getScreenHeight(),
+            bottomSheet = binding.root,
+            skipCollapsed = true
+        )
     }
 
     override fun FragmentMovieReviewsBinding.viewInitialization() {

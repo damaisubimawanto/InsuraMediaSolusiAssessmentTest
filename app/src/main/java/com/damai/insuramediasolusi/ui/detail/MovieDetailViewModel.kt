@@ -38,6 +38,9 @@ class MovieDetailViewModel(
     private val _movieReviewsLiveData = MutableLiveData<List<ReviewUiModel>>()
     val movieReviewsLiveData = _movieReviewsLiveData.asLiveData()
 
+    private val _movieReviewsCountLiveData = MutableLiveData(0)
+    val movieReviewsCountLiveData = _movieReviewsCountLiveData.asLiveData()
+
     private val _trailerMovieLiveData = MutableLiveData<MovieVideoModel?>()
     val trailerMovieLiveData = _trailerMovieLiveData.asLiveData()
     //endregion `Live Data`
@@ -104,6 +107,27 @@ class MovieDetailViewModel(
                     }
                     is Resource.Error -> {
 
+                    }
+                }
+            }
+        }
+    }
+
+    fun getMovieReviewsCount() {
+        viewModelScope.launch(dispatcher.io()) {
+            val requestModel = ReviewItemRequestModel(
+                movieId = movieId,
+                page = 1
+            )
+            getMovieReviewsUseCase(requestModel).collect { resource ->
+                when (resource) {
+                    is Resource.Success -> {
+                        resource.model?.list?.size?.let(
+                            _movieReviewsCountLiveData::postValue
+                        ) ?: _movieReviewsCountLiveData.postValue(0)
+                    }
+                    is Resource.Error -> {
+                        _movieReviewsCountLiveData.postValue(0)
                     }
                 }
             }

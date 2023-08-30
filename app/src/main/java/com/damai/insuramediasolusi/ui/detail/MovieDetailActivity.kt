@@ -5,9 +5,11 @@ import com.damai.insuramediasolusi.databinding.ActivityMovieDetailBinding
 import com.damai.insuramediasolusi.ui.review.MovieReviewsBottomSheetDialog
 import com.damai.base.BaseActivity
 import com.damai.base.extensions.observe
+import com.damai.base.extensions.orZero
 import com.damai.base.extensions.setCustomOnClickListener
 import com.damai.base.extensions.setCustomTextColor
 import com.damai.base.extensions.setCustomTint
+import com.damai.base.extensions.showShortToast
 import com.damai.base.utils.IntentUtil
 import com.damai.base.utils.VideoPlatformType
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,6 +31,10 @@ class MovieDetailActivity : BaseActivity<ActivityMovieDetailBinding, MovieDetail
 
     override fun ActivityMovieDetailBinding.setupListeners() {
         clMovieReviewCount.setCustomOnClickListener {
+            if (viewModel.movieReviewsCountLiveData.value.orZero() == 0) {
+                showShortToast(message = getString(R.string.empty_review_message))
+                return@setCustomOnClickListener
+            }
             val fragment = MovieReviewsBottomSheetDialog()
             fragment.show(
                 supportFragmentManager,
@@ -70,6 +76,7 @@ class MovieDetailActivity : BaseActivity<ActivityMovieDetailBinding, MovieDetail
 
     override fun ActivityMovieDetailBinding.onPreparationFinished() {
         viewModel.getMovieDetails()
+        viewModel.getMovieReviewsCount()
         viewModel.getMovieVideos()
     }
 
