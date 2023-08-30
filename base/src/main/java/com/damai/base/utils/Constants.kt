@@ -12,6 +12,7 @@ object Constants {
     const val BASE_VIMEO_URL = "https://vimeo.com/"
     const val TIMEOUT = 60L
     const val SUCCESS_CODE = 200
+    const val GLIDE_CROSS_FADE = 300   // milliseconds
 
     const val HEADER_AUTHORIZATION = "Authorization"
     const val HEADER_BEARER = "Bearer"

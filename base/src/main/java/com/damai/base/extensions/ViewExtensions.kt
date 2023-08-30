@@ -8,6 +8,8 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.damai.base.utils.Constants.GLIDE_CROSS_FADE
 
 /**
  * Created by damai007 on 18/August/2023
@@ -40,6 +42,7 @@ fun AppCompatImageView.loadImageWithCenterCrop(
     Glide.with(context)
         .load(url)
         .centerCrop()
+        .transition(DrawableTransitionOptions.withCrossFade(GLIDE_CROSS_FADE))
         .into(this)
 }
 
