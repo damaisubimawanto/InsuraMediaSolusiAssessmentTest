@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.damai.accordinnovations.ui.detail.MovieDetailViewModel" />
+            type="com.damai.insuramediasolusi.ui.detail.MovieDetailViewModel" />
 
     </data>
 

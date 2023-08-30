@@ -14,12 +14,12 @@
         android:name=".application.MyApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AccordInnovations"
+        android:theme="@style/Theme.InsuraMediaSolusi"
         tools:targetApi="31">
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.AccordInnovations">
+            android:theme="@style/Theme.InsuraMediaSolusi">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

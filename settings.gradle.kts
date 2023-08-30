@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AccordInnovations"
+rootProject.name = "InsuraMediaSolusi"
 include(":app")
 include(":base")
 include(":data")

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.damai.accordinnovations"
+    namespace = "com.damai.insuramediasolusi"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.damai.accordinnovations"
+        applicationId = "com.damai.insuramediasolusi"
         minSdk = 21
         targetSdk = 33
         versionCode = 1
@@ -55,4 +55,8 @@ dependencies {
     testImplementation("androidx.arch.core:core-testing:2.1.0")
     testImplementation("androidx.test.espresso:espresso-core:3.5.1")
     testImplementation("androidx.test.ext:junit:1.1.5")
+
+    androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test:runner:1.2.0")
 }
