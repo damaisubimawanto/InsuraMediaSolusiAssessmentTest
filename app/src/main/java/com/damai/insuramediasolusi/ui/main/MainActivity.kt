@@ -11,7 +11,9 @@ import com.damai.insuramediasolusi.ui.main.adapters.MovieAdapter
 import com.damai.insuramediasolusi.ui.main.adapters.MovieAdapter.Companion.FOOTER_ITEM
 import com.damai.base.BaseActivity
 import com.damai.base.extensions.observe
+import com.damai.base.extensions.toPx
 import com.damai.base.utils.EndlessScrollListener
+import com.damai.base.utils.SpaceGridItemDecoration
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,7 +33,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private val mEndlessScrollListener: EndlessScrollListener by lazy {
         object : EndlessScrollListener(
             layoutManager = requireNotNull(binding.rvMovies.layoutManager),
-            visibleThreshold = 5
+            visibleThreshold = 6
         ) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
                 if (viewModel.isStopLoadMore) return
@@ -78,6 +80,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
             layoutManager = gridLayoutManager
             adapter = mMovieAdapter
+            addItemDecoration(
+                SpaceGridItemDecoration(
+                    spanCount = spanCount,
+                    spacing = toPx(givenInt = 3)
+                )
+            )
             clearOnScrollListeners()
             addOnScrollListener(mEndlessScrollListener)
         }
