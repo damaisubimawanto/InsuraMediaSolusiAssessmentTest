@@ -2,6 +2,7 @@ package com.damai.data.responses
 
 import com.damai.base.BaseResponse
 import com.google.gson.annotations.SerializedName
+import java.math.BigInteger
 
 /**
  * Created by damai007 on 18/August/2023
@@ -53,7 +54,7 @@ class MovieItemResponse {
 
     /* More fields in movie details. */
     @SerializedName("budget")
-    var budget: Int? = null
+    var budget: BigInteger? = null
 
     @SerializedName("genres")
     var genres: List<MovieGenreResponse>? = null
@@ -68,7 +69,7 @@ class MovieItemResponse {
     var productionCompanies: List<ProductionCompanyResponse>? = null
 
     @SerializedName("revenue")
-    var revenue: Int? = null
+    var revenue: BigInteger? = null
 
     @SerializedName("runtime")
     var runtime: Int? = null
