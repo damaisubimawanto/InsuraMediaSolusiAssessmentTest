@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.damai.base.BaseViewModel
 import com.damai.base.coroutines.DispatcherProvider
 import com.damai.base.extensions.asLiveData
+import com.damai.base.extensions.getMutableList
 import com.damai.base.extensions.orZero
 import com.damai.base.networks.Resource
 import com.damai.base.utils.Constants.ARGS_MOVIE_ID
@@ -98,10 +99,7 @@ class MovieDetailViewModel(
                 when (resource) {
                     is Resource.Success -> {
                         resource.model?.list?.let { response ->
-                            var currentData = _movieReviewsLiveData.value?.toMutableList()
-                            if (currentData == null) {
-                                currentData = mutableListOf()
-                            }
+                            val currentData = _movieReviewsLiveData.getMutableList()
                             currentData.removeAll {
                                 it is ReviewUiModel.ReviewFooterLoading
                             }
