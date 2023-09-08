@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.damai.insuramediasolusi"
+    namespace = "com.damai.mandiribank"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.damai.insuramediasolusi"
+        applicationId = "com.damai.mandiribank"
         minSdk = 21
         targetSdk = 33
         versionCode = 1

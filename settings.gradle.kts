@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "InsuraMediaSolusi"
+rootProject.name = "MandiriBank"
 include(":app")
 include(":base")
 include(":data")

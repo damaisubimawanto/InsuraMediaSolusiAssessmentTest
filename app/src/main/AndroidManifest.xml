@@ -14,12 +14,12 @@
         android:name=".application.MyApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.InsuraMediaSolusi"
+        android:theme="@style/Theme.MandiriBank"
         tools:targetApi="31">
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.InsuraMediaSolusi">
+            android:theme="@style/Theme.MandiriBank">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
