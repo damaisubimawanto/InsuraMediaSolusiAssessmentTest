@@ -1,2 +1,2 @@
 # MandiriBankAssessmentTest
-This project is for technical test in Insura Mandiri Bank Assessment.
+This project is for technical test in Mandiri Bank Assessment.
