@@ -18,7 +18,7 @@ sealed class ResultWrapper<out T> {
 internal suspend fun <T: BaseModel> safeApiCall(
     dispatcher: CoroutineDispatcher,
     apiCall: suspend () -> T?
-): ResultWrapper<T?> {
+): ResultWrapper<T> {
     return withContext(dispatcher) {
         try {
             val call = apiCall.invoke()
